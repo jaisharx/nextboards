@@ -9,8 +9,16 @@ import {
     Button,
     Select
 } from '@chakra-ui/react';
+import { createRef } from 'react';
 
-export default function CreateNewCategory({ isOpen, onClose }) {
+export default function CreateNewCategory({ isOpen, onClose, setMoodboards }) {
+    const selectValue = createRef();
+    
+    const onSave = () => {
+        setMoodboards(( prevBoards) => [...prevBoards, selectValue.current.value.toUpperCase()]);
+        onClose();
+    };
+
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
@@ -18,15 +26,15 @@ export default function CreateNewCategory({ isOpen, onClose }) {
                 <ModalHeader>Create new category</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <Select placeholder="3d">
-                        <option value="option1">Modern</option>
-                        <option value="option2">Classic</option>
-                        <option value="option3">Illustrations</option>
+                    <Select ref={selectValue} placeholder="Select a category">
+                        <option value="modern">Modern</option>
+                        <option value="classic">Classic</option>
+                        <option value="illustrations">Illustrations</option>
                     </Select>
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button colorScheme="green" onClick={onClose}>
+                    <Button colorScheme="green" onClick={onSave}>
                         Save
                     </Button>
                 </ModalFooter>

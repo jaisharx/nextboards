@@ -12,7 +12,7 @@ export default function Header({ onOpen }) {
                     <Text>Next Gen Moodboards</Text>
                 </Box>
                 <Button colorScheme="blue" variant="outline" onClick={onOpen}>
-                    Create
+                    Add a category
                 </Button>
             </Flex>
         </Flex>
